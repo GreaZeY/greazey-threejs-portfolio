@@ -38,6 +38,11 @@ export const navLinks = [
     id: "contact",
     title: "Contact",
   },
+  {
+    id: "resume",
+    title: "Resume",
+    link: "https://drive.google.com/file/d/1OopwTj9Gk4ocAFdJtU0TZLhAmF9-RgFB",
+  },
 ];
 
 const services = [

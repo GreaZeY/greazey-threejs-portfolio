@@ -5,6 +5,8 @@ import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { menu, close } from "../assets";
 
+const resumeBtnClasses =
+  "border-solid border-2 border-[#915EFF] px-2 py-1 hover:bg-[#1d1836] ease-linear duration-300 text-white";
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -24,7 +26,6 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   return (
     <nav
       className={`${
@@ -53,16 +54,23 @@ const Navbar = () => {
           </p>
         </Link>
 
-        <ul className="list-none hidden sm:flex flex-row gap-10">
+        <ul className="list-none hidden sm:flex flex-row gap-10 items-center">
           {navLinks.map((nav) => (
             <li
               key={nav.id}
               className={`${
                 active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
+              } hover:text-white text-[18px] font-medium cursor-pointer ${
+                nav.link ? resumeBtnClasses : ""
+              }`}
               onClick={() => setActive(nav.title)}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
+              <a
+                target={nav.link ? "_blank" : "_self"}
+                href={nav.link ? nav.link : `#${nav.id}`}
+              >
+                {nav.title}
+              </a>
             </li>
           ))}
         </ul>
@@ -92,7 +100,14 @@ const Navbar = () => {
                     setActive(nav.title);
                   }}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  {
+                    <a
+                      target={nav.link ? "_blank" : "_self"}
+                      href={nav.link ? nav.link : `#${nav.id}`}
+                    >
+                      {nav.title}
+                    </a>
+                  }
                 </li>
               ))}
             </ul>
